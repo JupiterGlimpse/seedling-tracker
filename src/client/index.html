@@ -1,0 +1,78 @@
+<!-- INPUT: 用户交互（输入、点击），app.js（逻辑），styles.css（专业级样式） -->
+<!-- OUTPUT: 高端企业级用户界面（输入框、进展 Gallery、智能提醒） -->
+<!-- POS: 前端入口页面，专业咨询公司级别的视觉呈现 -->
+<!-- ⚠️ 更新提醒：修改此文件后，务必更新文件开头注释和所属文件夹的 README.md -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="description" content="Seedling Tracker - 专业的 AI 驱动进度追踪工具，智能归类、自动提醒、可视化展示">
+  <meta name="keywords" content="进度追踪,AI,项目管理,智能提醒,可视化">
+  <meta name="author" content="Seedling Tracker">
+  <meta name="theme-color" content="#1a2332">
+
+  <title>Seedling Tracker — 专业 AI 进度追踪平台</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- 品牌头部 -->
+    <header role="banner">
+      <h1>🌱 Seedling Tracker</h1>
+      <p class="subtitle">智能进度管理 · AI 驱动洞察 · 专业可视化平台</p>
+    </header>
+
+    <!-- 智能提醒面板 -->
+    <aside id="reminders-panel" class="reminders-panel" role="alert" aria-live="polite"></aside>
+
+    <!-- 进展记录区域 -->
+    <section class="input-section" aria-label="进展记录输入">
+      <h2>记录进展</h2>
+      <div class="input-group">
+        <textarea
+          id="progress-input"
+          placeholder="记录您的项目进展...&#10;&#10;示例：出具了一份报价 $50k 以上的美术咨询公司的专业提案"
+          rows="4"
+          aria-label="进展内容输入框"
+          maxlength="2000"
+        ></textarea>
+        <button id="submit-btn" class="btn-primary" aria-label="提交进展记录">
+          记录
+        </button>
+      </div>
+      <div id="confirmation-msg" class="confirmation-msg" role="status" aria-live="polite"></div>
+    </section>
+
+    <!-- 进展 Gallery 展示区 -->
+    <section class="progress-section" aria-label="进展历史记录">
+      <div class="section-header">
+        <h2>进展 Gallery</h2>
+        <button id="refresh-btn" class="btn-secondary" aria-label="刷新进展列表">
+          刷新
+        </button>
+      </div>
+      <div id="progress-list" class="progress-list" role="feed" aria-busy="true">
+        <p class="loading">正在加载进展记录...</p>
+      </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer role="contentinfo">
+      <p>
+        Powered by Anthropic Claude ·
+        <a href="https://github.com/JupiterGlimpse/seedling-tracker"
+           target="_blank"
+           rel="noopener noreferrer">
+          GitHub 仓库
+        </a>
+      </p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
