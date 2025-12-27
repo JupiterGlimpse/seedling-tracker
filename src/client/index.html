@@ -1,0 +1,56 @@
+<!-- INPUT: 用户交互（输入、点击），app.js（逻辑），styles.css（样式） -->
+<!-- OUTPUT: 用户界面（输入框、进展列表、提醒面板） -->
+<!-- POS: 前端入口页面，承载所有 UI 元素和用户交互 -->
+<!-- ⚠️ 更新提醒：修改此文件后，务必更新文件开头注释和所属文件夹的 README.md -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seedling Tracker - AI 进度追踪助手</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🌱 Seedling Tracker</h1>
+      <p class="subtitle">AI 进度追踪助手</p>
+    </header>
+
+    <!-- 提醒面板 -->
+    <div id="reminders-panel" class="reminders-panel"></div>
+
+    <!-- 输入区域 -->
+    <section class="input-section">
+      <h2>记录进展</h2>
+      <div class="input-group">
+        <textarea
+          id="progress-input"
+          placeholder="输入你今天的进展...&#10;&#10;例如：完成了 Seedling Tracker 的前端界面设计"
+          rows="4"
+        ></textarea>
+        <button id="submit-btn" class="btn-primary">记录</button>
+      </div>
+      <div id="confirmation-msg" class="confirmation-msg"></div>
+    </section>
+
+    <!-- 进展列表 -->
+    <section class="progress-section">
+      <div class="section-header">
+        <h2>最近进展</h2>
+        <button id="refresh-btn" class="btn-secondary">刷新</button>
+      </div>
+      <div id="progress-list" class="progress-list">
+        <p class="loading">加载中...</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>Powered by AI | <a href="https://github.com/JupiterGlimpse/seedling-tracker" target="_blank">GitHub</a></p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

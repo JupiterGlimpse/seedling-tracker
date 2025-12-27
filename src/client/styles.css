@@ -1,0 +1,365 @@
+/* INPUT: index.html DOM 结构 */
+/* OUTPUT: 页面样式（布局、颜色、响应式） */
+/* POS: 前端样式层，定义所有 UI 元素的视觉呈现 */
+/* ⚠️ 更新提醒：修改此文件后，务必更新文件开头注释和所属文件夹的 README.md */
+
+:root {
+  --primary-color: #4CAF50;
+  --secondary-color: #2196F3;
+  --danger-color: #f44336;
+  --warning-color: #ff9800;
+  --bg-color: #f5f5f5;
+  --card-bg: #ffffff;
+  --text-primary: #333;
+  --text-secondary: #666;
+  --border-color: #ddd;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  background: var(--bg-color);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+header h1 {
+  font-size: 2rem;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* Reminders Panel */
+.reminders-panel {
+  display: none;
+  background: #fff3cd;
+  border: 2px solid var(--warning-color);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.reminder-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+  padding: 15px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+}
+
+.reminder-item:last-child {
+  margin-bottom: 0;
+}
+
+.reminder-icon {
+  font-size: 2rem;
+}
+
+.reminder-content {
+  flex: 1;
+}
+
+.reminder-content strong {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--primary-color);
+}
+
+.reminder-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.reminder-actions button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.btn-proceed {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn-pause {
+  background: var(--warning-color);
+  color: white;
+}
+
+.btn-dismiss {
+  background: #ccc;
+  color: #666;
+}
+
+.reminder-actions button:hover {
+  opacity: 0.8;
+  transform: translateY(-1px);
+}
+
+/* Input Section */
+.input-section {
+  background: var(--card-bg);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  margin-bottom: 30px;
+}
+
+.input-section h2 {
+  margin-bottom: 15px;
+  color: var(--primary-color);
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+textarea {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.btn-primary, .btn-secondary {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: var(--secondary-color);
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #1976D2;
+}
+
+.confirmation-msg {
+  display: none;
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.confirmation-msg.success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.confirmation-msg.error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Progress Section */
+.progress-section {
+  background: var(--card-bg);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-header h2 {
+  color: var(--primary-color);
+}
+
+.progress-list .loading,
+.progress-list .empty,
+.progress-list .error {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-secondary);
+}
+
+.progress-item {
+  padding: 20px;
+  margin-bottom: 15px;
+  background: #fafafa;
+  border-left: 4px solid var(--primary-color);
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.progress-item:hover {
+  background: #f0f0f0;
+  transform: translateX(5px);
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.project-name {
+  font-weight: 600;
+  color: var(--primary-color);
+  font-size: 1.1rem;
+}
+
+.progress-time {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.progress-summary {
+  margin-bottom: 10px;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.progress-tags {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 4px 10px;
+  background: var(--secondary-color);
+  color: white;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+.progress-details {
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.progress-details summary {
+  color: var(--secondary-color);
+  font-size: 0.9rem;
+  user-select: none;
+}
+
+.progress-details p {
+  margin-top: 10px;
+  padding: 10px;
+  background: white;
+  border-radius: 4px;
+  white-space: pre-wrap;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: var(--secondary-color);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  .input-group {
+    flex-direction: column;
+  }
+
+  .reminder-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .reminder-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}

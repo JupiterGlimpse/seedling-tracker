@@ -1,0 +1,31 @@
+{
+  "name": "seedling-tracker",
+  "version": "1.0.0",
+  "description": "AI-powered progress tracking tool",
+  "main": "src/server/index.js",
+  "scripts": {
+    "start": "node src/server/index.js",
+    "dev": "nodemon src/server/index.js",
+    "db:init": "node -e \"require('./src/server/services/storage').init().then(() => console.log('Database initialized')).catch(console.error)\""
+  },
+  "keywords": [
+    "ai",
+    "progress-tracker",
+    "productivity"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "node-cron": "^3.0.3",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
