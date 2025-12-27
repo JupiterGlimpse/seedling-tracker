@@ -28,13 +28,22 @@ class AIService {
 
   // 分析用户输入，提取项目名称和摘要
   async analyzeProgress(content) {
-    if (!this.client) {
-      // Mock mode for development
+    // Mock mode fallback
+    const mockAnalyze = () => {
+      // 简单的关键词提取逻辑
+      const keywords = content.match(/[\u4e00-\u9fa5a-zA-Z]{2,}/g) || [];
+      const projectName = keywords[0] || 'Default Project';
+
       return {
-        projectName: 'Default Project',
-        summary: content.substring(0, 50) + '...',
-        tags: ['general']
+        projectName: projectName.substring(0, 20),
+        summary: content.substring(0, 50) + (content.length > 50 ? '...' : ''),
+        tags: keywords.slice(0, 3).map(k => k.substring(0, 10))
       };
+    };
+
+    if (!this.client) {
+      console.log('🔄 Using mock mode for AI analysis');
+      return mockAnalyze();
     }
 
     try {
@@ -70,13 +79,16 @@ ${content}
 
       throw new Error('AI response parsing failed');
     } catch (error) {
-      console.error('AI analysis error:', error.message);
-      // Fallback
-      return {
-        projectName: 'Default Project',
-        summary: content.substring(0, 50) + '...',
-        tags: ['general']
-      };
+      // 详细的错误日志
+      if (error.status === 403) {
+        console.error('⚠️  API Access Forbidden (403). Check your API key permissions.');
+        console.log('🔄 Falling back to mock mode');
+      } else {
+        console.error('AI analysis error:', error.message);
+      }
+
+      // 优雅降级到 mock 模式
+      return mockAnalyze();
     }
   }
 
