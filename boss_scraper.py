@@ -14,9 +14,12 @@ try:
     from selenium.webdriver.support.ui import WebDriverWait
     from selenium.webdriver.support import expected_conditions as EC
     from selenium.webdriver.chrome.options import Options
+    from selenium.webdriver.chrome.service import Service
     from selenium.common.exceptions import TimeoutException, NoSuchElementException
-except ImportError:
-    print("请安装Selenium: pip install selenium")
+    from webdriver_manager.chrome import ChromeDriverManager
+except ImportError as e:
+    print(f"请安装依赖: {e}")
+    print("pip install selenium webdriver-manager")
     exit(1)
 
 
@@ -57,7 +60,7 @@ class BossJobScraper:
         self.driver = None
 
     def _init_driver(self):
-        """初始化Selenium WebDriver"""
+        """初始化Selenium WebDriver（自动管理ChromeDriver）"""
         if self.driver:
             return
 
@@ -71,13 +74,15 @@ class BossJobScraper:
         options.add_argument('--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36')
 
         try:
-            self.driver = webdriver.Chrome(options=options)
-            print("✓ Chrome WebDriver初始化成功")
+            # 使用webdriver-manager自动下载和管理ChromeDriver
+            service = Service(ChromeDriverManager().install())
+            self.driver = webdriver.Chrome(service=service, options=options)
+            print("✓ Chrome WebDriver初始化成功（自动管理）")
         except Exception as e:
-            print(f"初始化WebDriver失败: {e}")
-            print("请确保已安装Chrome和ChromeDriver")
-            print("Ubuntu/Debian: sudo apt-get install chromium-chromedriver")
-            print("或下载: https://chromedriver.chromium.org/")
+            print(f"❌ 初始化WebDriver失败: {e}")
+            print("\n请确保已安装Chrome浏览器")
+            print("macOS: 从 https://www.google.com/chrome/ 下载")
+            print("Ubuntu: sudo apt-get install google-chrome-stable")
             raise
 
     def search_jobs(
