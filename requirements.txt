@@ -1,0 +1,21 @@
+# 核心依赖
+selenium>=4.15.0
+webdriver-manager>=4.0.0
+
+# Notion API（推荐 - 配置简单）
+notion-client>=2.2.1
+python-dotenv>=1.0.0
+
+# Google Sheets（可选 - 配置复杂）
+# google-auth>=2.25.0
+# google-auth-oauthlib>=1.2.0
+# google-auth-httplib2>=0.2.0
+# google-api-python-client>=2.110.0
+
+# 增强功能
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+
+# MCP Server依赖（Node.js环境）
+# 请在boss-scraper-mcp目录下运行: npm install

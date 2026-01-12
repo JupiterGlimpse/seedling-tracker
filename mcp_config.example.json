@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "boss-scraper": {
+      "command": "node",
+      "args": ["/绝对路径/seedling-tracker/boss-scraper-mcp/index.js"],
+      "env": {}
+    },
+    "google-sheets": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-gdrive"],
+      "env": {}
+    }
+  }
+}
